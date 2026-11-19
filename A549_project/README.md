@@ -27,29 +27,29 @@ A549_project/
 The project runs on **Python 3.15.0** within an isolated virtual environment (`.venv`).
 
 ### Installation Steps:
-Workflow A: Plots, Diagnostics, and PyDESeq2 Synthetic Dataset
-Compute size factors and load synthetic data (cell f934279e):
-loads information and raw counts for the dataset "synthetic" using pydeseq2.datasets.load_example_data.
+#Workflow A: Plots, Diagnostics, and PyDESeq2 Synthetic Dataset
+#Compute size factors and load synthetic data :
+#loads information and raw counts for the dataset "synthetic" using pydeseq2.datasets.load_example_data.
 DeseqDataSet(..., design="~condition", refit_cooks=True) and DefaultInference(n_cpus=8) are initialized.
 examines dds.obs ("size_factors") and executes dds.fit_size_factors().
 Set up the output directory, filter, and execute DESeq2 (cells 09d8c468 through 10532e9a):
 constructs it using os.makedirs(OUTPUT_PATH, exist_ok=True) after setting OUTPUT_PATH = "../output_files/synthetic_example."
-filters to genes with total counts >= 10 across samples (counts_df.sum(axis=0) >= 10) and eliminates samples with missing (NaN) condition values.
+#filters to genes with total counts >= 10 across samples (counts_df.sum(axis=0) >= 10) and eliminates samples with missing (NaN) condition values.
 executes dds.deseq2().
-Save AnnData and examine statistics, dispersions, and LFC shrinkage (cells ef396d6e through ffcf42db):
+#Save AnnData and examine statistics, dispersions, and LFC shrinkage (cells ef396d6e through ffcf42db):
 dds.to_picklable_anndata() is serialized to ../output_files/synthetic_example/result_adata.pkl.
 prints dds.var ("dispersions").
-executes ds.summary() and DeseqStats(dds, contrast=="condition", "B", "A", inference=inference).
+#executes ds.summary() and DeseqStats(dds, contrast=="condition", "B", "A", inference=inference).
 examines dds.obsm."design_matrix"].columns and uses ds.lfc_shrink(coeff="condition[T.B]") to apply log2 fold-change shrinkage, saving the results in res_shrunk = ds.results_df.
-Example of AnnData compilation and gene occurrence filtering (cells a2a88e67 and 1f833a39):
-Genes with >= 10 are filtered
-counts in a minimum of three samples (counts_df >= 10).sum(axis=0) >= 3) and creates an anndata.The synthetic dataset's AnnData object (adata.shape -> (100, 10)).
-VST PCA plot, MA plot, sample diagnostics, and VST transformation (cells 07f527f0 and c0ea0d9a):
-uses dds.vst (use_design=False, fit_type="parametric") to calculate variance-stabilized counts (dds.layers\vst_counts").
+#Example of AnnData compilation and gene occurrence filtering (cells a2a88e67 and 1f833a39):
+#Genes with >= 10 are filtered
+#counts in a minimum of three samples (counts_df >= 10).sum(axis=0) >= 3) and creates an anndata.The synthetic #dataset's AnnData object (adata.shape -> (100, 10)).
+#VST PCA plot, MA plot, sample diagnostics, and VST transformation (cells 07f527f0 and c0ea0d9a):
+#uses dds.vst (use_design=False, fit_type="parametric") to calculate variance-stabilized counts (dds.layers\vst_counts").
 creates ma_plot.png (300 dpi) that classifies genes on a log-scale baseMean axis according to padj < 0.05 and log2FoldChange direction (Increased, Decreased, Not significant).
 calculates the mean pairwise Pearson correlation between each sample and other samples (Mean_Sample_Corr), displays the sample diagnostics table, saves pca_vst.png (300 dpi), and performs PCA (2 components) on up to the top 500 highest-variance VST genes.
-Workflow B: MyGene.info Gene Annotations (Ensembl BioMart Fallback)
-Human gene annotations are received in cell 9a22c821 after Ensembl BioMart fails its TLS handshake in the notebook environment.
+#Workflow B: MyGene.info Gene Annotations (Ensembl BioMart Fallback)
+#Human gene annotations are received in cell 9a22c821 after Ensembl BioMart fails its TLS handshake in the notebook environment.
 from MyGene.info ([https://mygene.info/v3/query](https://mygene.info/v3/query)).
 List the Ensembl gene IDs for humans, such as ['ENSG00000125285', 'ENSG00000182968'].
 [https://mygene.info/v3/query](https://mygene.info/v3/query) with q=f'ensembl.gene:{gene_id}, fields='symbol,entrezgene,go', and species='human'.
