@@ -80,7 +80,7 @@ This analysis uses the six A549 3-day samples from **GEO series `GSE224740`**:
 - **Control (`GSM7030651`–`GSM7030653`)**
 - **Propionate (`GSM7030654`–`GSM7030656`)**
 
-### 1. Download `GSE224740_Raw_Count_Table_1.txt.gz`
+### 5. Download `GSE224740_Raw_Count_Table_1.txt.gz`
 1. Open the **GSE224740** record on NCBI GEO (`https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE224740`) and scroll to the **Supplementary file** section at the bottom.
 2. Download **`GSE224740_Raw_Count_Table_1.txt.gz`** (keep it compressed as `.txt.gz`; do not extract it).
    - *(Optional)* If you have the direct GEO FTP/HTTPS supplementary file URL, you can also download it from the command line:
@@ -89,7 +89,7 @@ This analysis uses the six A549 3-day samples from **GEO series `GSE224740`**:
        -o A549_project/data/raw/GSE224740_Raw_Count_Table_1.txt.gz
      ```
 
-### 2. Place the File in `data/raw/`
+### 6. Place the File in `data/raw/`
 Move or copy `GSE224740_Raw_Count_Table_1.txt.gz` into your raw data directory:
 
 ```text
