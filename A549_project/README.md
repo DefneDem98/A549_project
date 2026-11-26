@@ -74,3 +74,33 @@ Within the `gse224740_heatmap` cell:
 1. **Generate upstream tables first** by running `src/analyze_gse224740_propionate.py` so the required CSV inputs exist (`GSE224740_3day_vst_expression.csv`, `GSE224740_propionate_vs_control_deseq2.csv`, and `GSE224740_3day_library_sizes.csv`)[cite: 8].
 2. **Select top 15 DE genes**, order samples (`Control` followed by `Propionate`), and compute row-wise z-scores of VST expression[cite: 8].
 3. **Save outputs** to `results/tables/GSE224740_top15_vst_gene_heatmap_zscores.csv` and `results/figures/GSE224740_top15_vst_gene_heatmap.png`[cite: 8].
+4. ## Data Setup & Downloading Raw Counts
+
+This analysis uses the six A549 3-day samples from **GEO series `GSE224740`**:
+- **Control (`GSM7030651`–`GSM7030653`)**
+- **Propionate (`GSM7030654`–`GSM7030656`)**
+
+### 1. Download `GSE224740_Raw_Count_Table_1.txt.gz`
+1. Open the **GSE224740** record on NCBI GEO (`https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE224740`) and scroll to the **Supplementary file** section at the bottom.
+2. Download **`GSE224740_Raw_Count_Table_1.txt.gz`** (keep it compressed as `.txt.gz`; do not extract it).
+   - *(Optional)* If you have the direct GEO FTP/HTTPS supplementary file URL, you can also download it from the command line:
+     ```bash
+     curl -L "<DIRECT_GEO_SUPPLEMENTARY_URL_FOR_GSE224740_Raw_Count_Table_1.txt.gz>" \
+       -o A549_project/data/raw/GSE224740_Raw_Count_Table_1.txt.gz
+     ```
+
+### 2. Place the File in `data/raw/`
+Move or copy `GSE224740_Raw_Count_Table_1.txt.gz` into your raw data directory:
+
+```text
+A549_project/
+├── data/
+│   ├── metadata/
+│   │   └── GSE224740_A549_3day_samples.csv
+│   └── raw/
+│       └── GSE224740_Raw_Count_Table_1.txt.gz
+├── results/
+│   ├── figures/
+│   └── tables/
+└── src/
+    └── analyze_gse224740_propionate.py
